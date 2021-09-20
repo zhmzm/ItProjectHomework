@@ -12,7 +12,11 @@ public class loginServiceImpl implements loginService {
     UserDao userDao;
     @Override
     public int addNewUser(User newUser) {
-        userDao.insertSelective(newUser);
-        return 0;
+        return userDao.insertSelective(newUser);
+    }
+
+    @Override
+    public User checkUser(User checkUser) {
+        return userDao.selectByAccountAndPassword(checkUser);
     }
 }

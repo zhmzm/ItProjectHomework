@@ -24,6 +24,13 @@
     from user
     where ID = #{id,jdbcType=DECIMAL}
   </select>
+  <select id="selectByAccountAndPassword" parameterType="com.shop.demo.entity.User" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from user
+    where account = #{account,jdbcType=CHAR} and password = #{password,jdbcType=CHAR}
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
     delete from user
     where ID = #{id,jdbcType=DECIMAL}

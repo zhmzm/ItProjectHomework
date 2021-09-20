@@ -3,7 +3,6 @@ package com.shop.demo.Dao;
 import com.shop.demo.entity.User;
 import org.apache.ibatis.annotations.Mapper;
 
-
 import java.math.BigDecimal;
 @Mapper
 public interface UserDao {
@@ -18,4 +17,6 @@ public interface UserDao {
     int updateByPrimaryKeySelective(User record);
 
     int updateByPrimaryKey(User record);
+
+    User selectByAccountAndPassword(User record);
 }
