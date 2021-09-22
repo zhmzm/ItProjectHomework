@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Api("登录界面接口")
 @RestController
-@RequestMapping("/user")
 @Controller
 public class loginController {
     @Autowired
