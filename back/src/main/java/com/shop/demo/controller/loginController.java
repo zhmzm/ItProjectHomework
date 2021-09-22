@@ -31,13 +31,8 @@ public class loginController {
 
     @ApiOperation("查询用户")
     @PostMapping("/check")
-    public int checkUser(User checkUser){
-        if (Servicer.checkUser(checkUser) == null){
-            return 0;
-        }
-        else
-        {
-            return 1;
-        }
+    public int checkUser(User checkUser) {
+        checkUser.seteMail(checkUser.getAccount());
+        return Servicer.checkUser(checkUser);
     }
 }

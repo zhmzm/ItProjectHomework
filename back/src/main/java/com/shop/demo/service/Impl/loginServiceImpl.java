@@ -16,7 +16,13 @@ public class loginServiceImpl implements loginService {
     }
 
     @Override
-    public User checkUser(User checkUser) {
-        return userDao.selectByAccountAndPassword(checkUser);
+    public int checkUser(User checkUser) {
+        if (userDao.selectByAccountAndPassword(checkUser) == null &&
+                userDao.selectByPhoneAndPassword(checkUser) == null &&
+                userDao.selectByEmailAndPassword(checkUser) == null)
+        {
+            return 0;
+        }
+        return 1;
     }
 }

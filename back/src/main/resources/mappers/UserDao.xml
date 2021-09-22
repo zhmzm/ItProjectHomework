@@ -30,6 +30,18 @@
     from user
     where account = #{account,jdbcType=CHAR} and password = #{password,jdbcType=CHAR}
   </select>
+  <select id="selectByEmailAndPassword" parameterType="com.shop.demo.entity.User" resultType="com.shop.demo.entity.User">
+    select
+    <include refid="Base_Column_List" />
+    from user
+    where e_mail = #{eMail,jdbcType=CHAR} and password = #{password,jdbcType=CHAR}
+  </select>
+  <select id="selectByPhoneAndPassword" parameterType="com.shop.demo.entity.User" resultType="com.shop.demo.entity.User">
+    select
+    <include refid="Base_Column_List" />
+    from user
+    where phone_number = #{phoneNumber,jdbcType=DECIMAL} and password = #{password,jdbcType=CHAR}
+  </select>
 
   <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
     delete from user

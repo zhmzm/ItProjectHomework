@@ -5,5 +5,5 @@ import org.springframework.stereotype.Service;
 
 public interface loginService {
     int addNewUser(User newUser);
-    User checkUser(User checkUser);
+    int checkUser(User checkUser);
 }

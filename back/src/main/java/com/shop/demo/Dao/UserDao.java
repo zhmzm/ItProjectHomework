@@ -19,4 +19,8 @@ public interface UserDao {
     int updateByPrimaryKey(User record);
 
     User selectByAccountAndPassword(User record);
+
+    User selectByEmailAndPassword(User record);
+
+    User selectByPhoneAndPassword(User record);
 }
