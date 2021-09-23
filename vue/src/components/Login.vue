@@ -21,7 +21,7 @@ export default {
       let formData = new FormData();
       formData.append('account', this.LoginUser.userId)
       formData.append('password',this.LoginUser.userPassword)
-      axios.post("api/user/check", formData).then(res => {
+      axios.post("http://localhost:8080/api/user/check", formData).then(res => {
         if (res.data === 1) {
           alert('成功')
         } else {

@@ -28,7 +28,7 @@ export default {
         let formData = new FormData();
         formData.append('account',this.RegisterUser.userId)
         formData.append('password','1')
-        axios.post("api/user/add", formData).then(res => {
+        axios.post("http://localhost:8080/api/user/add", formData).then(res => {
           alert('成功注册')
         })
       }else{
