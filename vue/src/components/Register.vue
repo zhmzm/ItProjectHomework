@@ -27,7 +27,10 @@ export default {
       if(this.RegisterUser.userPassword === this.RegisterUser.userRepeat){
         let formData = new FormData();
         formData.append('account',this.RegisterUser.userId)
-        formData.append('password','1')
+        formData.append('password',this.RegisterUser.userPassword)
+        formData.append('name',this.RegisterUser.userName)
+        formData.append('phoneNumber', parseInt(this.RegisterUser.userPhone))
+
         axios.post("http://localhost:8080/api/user/add", formData).then(res => {
           alert('成功注册')
         })
