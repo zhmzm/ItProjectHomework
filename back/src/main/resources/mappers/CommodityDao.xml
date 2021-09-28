@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shop.demo.Dao.CommodityDao">
+  <resultMap id="BaseResultMap" type="com.shop.demo.entity.Commodity">
+    <id column="ID" jdbcType="INTEGER" property="id" />
+    <result column="seller_ID" jdbcType="INTEGER" property="sellerId" />
+    <result column="shelf_time" jdbcType="DATE" property="shelfTime" />
+    <result column="name" jdbcType="CHAR" property="name" />
+    <result column="description" jdbcType="CHAR" property="description" />
+    <result column="prise" jdbcType="FLOAT" property="prise" />
+    <result column="discount" jdbcType="FLOAT" property="discount" />
+    <result column="inventory" jdbcType="DECIMAL" property="inventory" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, seller_ID, shelf_time, `name`, description, prise, discount, inventory
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from commodity
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from commodity
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="ID" keyProperty="id" parameterType="com.shop.demo.entity.Commodity" useGeneratedKeys="true">
+    insert into commodity (seller_ID, shelf_time, `name`, 
+      description, prise, discount, 
+      inventory)
+    values (#{sellerId,jdbcType=INTEGER}, #{shelfTime,jdbcType=DATE}, #{name,jdbcType=CHAR}, 
+      #{description,jdbcType=CHAR}, #{prise,jdbcType=FLOAT}, #{discount,jdbcType=FLOAT}, 
+      #{inventory,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" keyColumn="ID" keyProperty="id" parameterType="com.shop.demo.entity.Commodity" useGeneratedKeys="true">
+    insert into commodity
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="sellerId != null">
+        seller_ID,
+      </if>
+      <if test="shelfTime != null">
+        shelf_time,
+      </if>
+      <if test="name != null">
+        `name`,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+      <if test="prise != null">
+        prise,
+      </if>
+      <if test="discount != null">
+        discount,
+      </if>
+      <if test="inventory != null">
+        inventory,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="sellerId != null">
+        #{sellerId,jdbcType=INTEGER},
+      </if>
+      <if test="shelfTime != null">
+        #{shelfTime,jdbcType=DATE},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=CHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=CHAR},
+      </if>
+      <if test="prise != null">
+        #{prise,jdbcType=FLOAT},
+      </if>
+      <if test="discount != null">
+        #{discount,jdbcType=FLOAT},
+      </if>
+      <if test="inventory != null">
+        #{inventory,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.shop.demo.entity.Commodity">
+    update commodity
+    <set>
+      <if test="sellerId != null">
+        seller_ID = #{sellerId,jdbcType=INTEGER},
+      </if>
+      <if test="shelfTime != null">
+        shelf_time = #{shelfTime,jdbcType=DATE},
+      </if>
+      <if test="name != null">
+        `name` = #{name,jdbcType=CHAR},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=CHAR},
+      </if>
+      <if test="prise != null">
+        prise = #{prise,jdbcType=FLOAT},
+      </if>
+      <if test="discount != null">
+        discount = #{discount,jdbcType=FLOAT},
+      </if>
+      <if test="inventory != null">
+        inventory = #{inventory,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.shop.demo.entity.Commodity">
+    update commodity
+    set seller_ID = #{sellerId,jdbcType=INTEGER},
+      shelf_time = #{shelfTime,jdbcType=DATE},
+      `name` = #{name,jdbcType=CHAR},
+      description = #{description,jdbcType=CHAR},
+      prise = #{prise,jdbcType=FLOAT},
+      discount = #{discount,jdbcType=FLOAT},
+      inventory = #{inventory,jdbcType=DECIMAL}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

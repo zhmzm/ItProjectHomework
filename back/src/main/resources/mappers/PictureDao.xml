@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shop.demo.Dao.PictureDao">
+  <resultMap id="BaseResultMap" type="com.shop.demo.entity.Picture">
+    <id column="ID" jdbcType="INTEGER" property="id" />
+    <result column="commodity_ID" jdbcType="INTEGER" property="commodityId" />
+    <result column="address" jdbcType="CHAR" property="address" />
+    <result column="slot" jdbcType="DECIMAL" property="slot" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, commodity_ID, address, slot
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from picture
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectByCommodityId" resultType="com.shop.demo.entity.Picture">
+    select *
+    from picture
+    where commodity_ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from picture
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="ID" keyProperty="id" parameterType="com.shop.demo.entity.Picture" useGeneratedKeys="true">
+    insert into picture (commodity_ID, address, slot
+      )
+    values (#{commodityId,jdbcType=INTEGER}, #{address,jdbcType=CHAR}, #{slot,jdbcType=DECIMAL}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="ID" keyProperty="id" parameterType="com.shop.demo.entity.Picture" useGeneratedKeys="true">
+    insert into picture
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="commodityId != null">
+        commodity_ID,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="slot != null">
+        slot,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="commodityId != null">
+        #{commodityId,jdbcType=INTEGER},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=CHAR},
+      </if>
+      <if test="slot != null">
+        #{slot,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.shop.demo.entity.Picture">
+    update picture
+    <set>
+      <if test="commodityId != null">
+        commodity_ID = #{commodityId,jdbcType=INTEGER},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=CHAR},
+      </if>
+      <if test="slot != null">
+        slot = #{slot,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.shop.demo.entity.Picture">
+    update picture
+    set commodity_ID = #{commodityId,jdbcType=INTEGER},
+      address = #{address,jdbcType=CHAR},
+      slot = #{slot,jdbcType=DECIMAL}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
