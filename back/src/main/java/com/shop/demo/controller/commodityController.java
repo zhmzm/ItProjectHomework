@@ -48,5 +48,10 @@ public class commodityController {
     public List<Picture> getPicture(String  commodityID){
         return photoService.getPicture(commodityID);
     }
+    @ApiOperation("查询商品列表")
+    @PostMapping("/shoplist")
+    public List<String> getShopList(){
+        return commodityservice.getAllCommodity();
+    }
 
 }

@@ -20,7 +20,11 @@
     from commodity
     where ID = #{id,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <select id="getAllId" resultType="java.lang.String">
+      select ID
+      from commodity
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from commodity
     where ID = #{id,jdbcType=INTEGER}
   </delete>

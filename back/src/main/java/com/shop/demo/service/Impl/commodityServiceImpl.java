@@ -7,6 +7,8 @@ import com.shop.demo.service.commodityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class commodityServiceImpl implements commodityService {
     @Autowired
@@ -26,4 +28,12 @@ public class commodityServiceImpl implements commodityService {
     public int delCommodity(Commodity delCommodity) {
         return commodityDao.deleteByPrimaryKey(delCommodity.getId());
     }
+
+    @Override
+    public List<String> getAllCommodity() {
+        //现在redis里面查
+        //查不到再从数据库里面找，然后放到redis里面
+        return commodityDao.getAllId();
+    }
+
 }
