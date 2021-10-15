@@ -5,6 +5,8 @@ import com.shop.demo.entity.User;
 
 import com.shop.demo.service.loginService;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.apache.ibatis.jdbc.Null;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +25,13 @@ public class loginController {
     @Autowired
     loginService Servicer;
 
-    @ApiOperation("添加用户")
+    @ApiOperation(value = "添加用户", notes = "无返回值")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name="name",value="昵称",required=true),
+            @ApiImplicitParam(name="account",value="账号",required=true),
+            @ApiImplicitParam(name="phone_number",value="手机号",required=true),
+            @ApiImplicitParam(name="password",value="密码",required=true,paramType="string"),
+    })
     @PostMapping(value = "/add")
     public int addNewUser(User newUser){
         return Servicer.addNewUser(newUser);
