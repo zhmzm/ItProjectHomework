@@ -6,6 +6,8 @@ import com.shop.demo.service.commodityService;
 import com.shop.demo.service.photoService;
 import com.shop.demo.service.loginService;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,6 +27,9 @@ public class commodityController {
     photoService photoService;
 
     @ApiOperation("查看商品信息")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name="id",required=true),
+    })
     @PostMapping("/check")
     public Commodity checkCommodity(Commodity commodity){
         return commodityservice.checkCommodity(commodity);
@@ -38,6 +43,9 @@ public class commodityController {
     }
 
     @ApiOperation("删除商品信息")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name="id",required=true),
+    })
     @PostMapping("/del")
     public int delCommodity(Commodity commodity){
         return commodityservice.delCommodity(commodity);

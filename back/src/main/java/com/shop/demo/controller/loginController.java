@@ -39,7 +39,14 @@ public class loginController {
 
     @ApiOperation("查询用户")
     @PostMapping("/check")
-    public int checkUser(User checkUser) {
+    @ApiImplicitParams({
+            @ApiImplicitParam(name="account",value="账号",required=true),
+            @ApiImplicitParam(name="password",value="密码",required=true),
+    })
+    public int checkUser(String account, String password) {
+        User checkUser = new User();
+        checkUser.setAccount(account);
+        checkUser.setPassword(password);
         checkUser.seteMail(checkUser.getAccount());
         return Servicer.checkUser(checkUser);
     }
