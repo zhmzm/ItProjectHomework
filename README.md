@@ -9,3 +9,8 @@ clone后，cd到back文件夹，键入mvn install,后可在idea里面启动
 3. 在服务器该jar包路径下启动: nohup ./start.sh &
 4. 如果需要关闭该服务，“#netstat -tunlp | grep  8081”或“#ps -ef | grep java”   查出java进程编号
 5. "#kill -9 xxxx" xxxx是java的进程编号
+#### 关闭ftp
+查看FTP服务是否运行中：service vsftpd status
+启动FTP服务：service vsftpd start
+停止FTP服务：service vsftpd stop
+重启FTP服务：service vsftpd restart
