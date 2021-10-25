@@ -54,8 +54,16 @@ public class shoppingCartController {
             @ApiImplicitParam(name="id",value="购物车记录的id",required=true),
     })
     @PostMapping("/delCart")
-
     public int delInCartList(int id){
         return shoppingCart.delRecord(id);
+    }
+    @ApiOperation("更新购物车库存信息")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name="id",value="购物车记录的id",required=true),
+            @ApiImplicitParam(name="num",value="更新后的库存",required=true),
+    })
+    @PostMapping("/updateCart")
+    public int updateToCartList(ShoppingCart updateRecord){
+        return shoppingCart.updateRecord(updateRecord);
     }
 }

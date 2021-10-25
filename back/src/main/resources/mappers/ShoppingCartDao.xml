@@ -100,4 +100,9 @@
       num = #{num,jdbcType=INTEGER}
     where ID = #{id,jdbcType=INTEGER}
   </update>
+  <update id="updateNum">
+    update shopping_cart
+    set num = #{num,jdbcType=INTEGER},
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
 </mapper>

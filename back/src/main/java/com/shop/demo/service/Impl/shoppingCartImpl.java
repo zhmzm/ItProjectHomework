@@ -26,4 +26,9 @@ public class shoppingCartImpl implements shoppingCart {
     public int delRecord(int id) {
         return shoppingCartDao.deleteByPrimaryKey(id);
     }
+
+    @Override
+    public int updateRecord(ShoppingCart updateRecord) {
+        return shoppingCartDao.updateByPrimaryKeySelective(updateRecord);
+    }
 }

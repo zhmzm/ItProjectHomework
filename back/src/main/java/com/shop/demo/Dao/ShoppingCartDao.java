@@ -20,4 +20,6 @@ public interface ShoppingCartDao {
     int updateByPrimaryKey(ShoppingCart record);
 
     List<ShoppingCart> selectByUserId(Integer userId);
+
+    int updateNum(ShoppingCart record);
 }
