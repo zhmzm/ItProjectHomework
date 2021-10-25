@@ -14,7 +14,7 @@ public class photoServiceImpl implements photoService {
     PictureDao pictureDao;
 
     @Override
-    public List<Picture> getPicture(String commodityID) {
+    public List<Picture> getPicture(Integer commodityID) {
         return pictureDao.selectByCommodityId(commodityID);
     }
 

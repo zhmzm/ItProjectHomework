@@ -6,6 +6,6 @@ import com.shop.demo.entity.Picture;
 import java.util.List;
 
 public interface photoService {
-    List<Picture> getPicture(String commodityID);
+    List<Picture> getPicture(Integer commodityID);
     int addPicture(Picture addpicture);
 }

@@ -18,5 +18,5 @@ public interface PictureDao {
 
     int updateByPrimaryKey(Picture record);
 
-    List<Picture> selectByCommodityId(String id);
+    List<Picture> selectByCommodityId(Integer id);
 }
