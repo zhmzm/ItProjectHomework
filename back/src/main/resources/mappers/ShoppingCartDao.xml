@@ -4,7 +4,7 @@
   <resultMap id="BaseResultMap" type="com.shop.demo.entity.ShoppingCart">
     <id column="ID" jdbcType="INTEGER" property="id" />
     <result column="user_ID" jdbcType="INTEGER" property="userId" />
-    <result column="create_date" jdbcType="DATE" property="createDate" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
     <result column="create_price" jdbcType="FLOAT" property="createPrice" />
     <result column="commodity_ID" jdbcType="INTEGER" property="commodityId" />
     <result column="num" jdbcType="INTEGER" property="num" />
@@ -30,7 +30,7 @@
   <insert id="insert" keyColumn="ID" keyProperty="id" parameterType="com.shop.demo.entity.ShoppingCart" useGeneratedKeys="true">
     insert into shopping_cart (user_ID, create_date, create_price, 
       commodity_ID, num)
-    values (#{userId,jdbcType=INTEGER}, #{createDate,jdbcType=DATE}, #{createPrice,jdbcType=FLOAT}, 
+    values (#{userId,jdbcType=INTEGER}, #{createDate,jdbcType=TIMESTAMP}, #{createPrice,jdbcType=FLOAT}, 
       #{commodityId,jdbcType=INTEGER}, #{num,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" keyColumn="ID" keyProperty="id" parameterType="com.shop.demo.entity.ShoppingCart" useGeneratedKeys="true">
@@ -57,7 +57,7 @@
         #{userId,jdbcType=INTEGER},
       </if>
       <if test="createDate != null">
-        #{createDate,jdbcType=DATE},
+        #{createDate,jdbcType=TIMESTAMP},
       </if>
       <if test="createPrice != null">
         #{createPrice,jdbcType=FLOAT},
@@ -77,7 +77,7 @@
         user_ID = #{userId,jdbcType=INTEGER},
       </if>
       <if test="createDate != null">
-        create_date = #{createDate,jdbcType=DATE},
+        create_date = #{createDate,jdbcType=TIMESTAMP},
       </if>
       <if test="createPrice != null">
         create_price = #{createPrice,jdbcType=FLOAT},
@@ -94,15 +94,10 @@
   <update id="updateByPrimaryKey" parameterType="com.shop.demo.entity.ShoppingCart">
     update shopping_cart
     set user_ID = #{userId,jdbcType=INTEGER},
-      create_date = #{createDate,jdbcType=DATE},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
       create_price = #{createPrice,jdbcType=FLOAT},
       commodity_ID = #{commodityId,jdbcType=INTEGER},
       num = #{num,jdbcType=INTEGER}
-    where ID = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateNum">
-    update shopping_cart
-    set num = #{num,jdbcType=INTEGER},
     where ID = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

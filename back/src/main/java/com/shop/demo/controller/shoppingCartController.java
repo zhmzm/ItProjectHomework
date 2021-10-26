@@ -1,7 +1,6 @@
 package com.shop.demo.controller;
 
-import com.shop.demo.entity.Commodity;
-import com.shop.demo.entity.Picture;
+
 import com.shop.demo.entity.ShoppingCart;
 import com.shop.demo.service.shoppingCart;
 import io.swagger.annotations.*;

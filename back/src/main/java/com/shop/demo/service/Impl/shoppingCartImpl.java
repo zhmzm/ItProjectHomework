@@ -14,6 +14,7 @@ public class shoppingCartImpl implements shoppingCart {
 
     @Override
     public List<ShoppingCart> getAllCommodityFromCart(Integer userId) {
+        //return null;
         return shoppingCartDao.selectByUserId(userId);
     }
 
