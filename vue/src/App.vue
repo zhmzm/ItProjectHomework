@@ -38,7 +38,7 @@ export default {
       this.$router.replace('/loginandregister')
     },
     gotoHome(){
-      this.$router.replace('/')
+      this.$router.replace('/Shop')
     }
   },
 }
