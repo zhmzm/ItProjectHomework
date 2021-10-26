@@ -16,7 +16,7 @@
     from picture
     where ID = #{id,jdbcType=INTEGER}
   </select>
-  <select id="selectByCommodityId" resultType="com.shop.demo.entity.Picture">
+  <select id="selectByCommodityId" parameterType="java.lang.Integer" resultType="com.shop.demo.entity.Picture">
     select *
     from picture
     where commodity_ID = #{id,jdbcType=INTEGER}

@@ -18,6 +18,16 @@
     where commodity_ID = #{commodityId,jdbcType=INTEGER}
       and user_ID = #{userId,jdbcType=INTEGER}
   </select>
+    <select id="checkCommentsByCommodityId" resultType="com.shop.demo.entity.Comments">
+      select *
+      from comments
+      where commodity_ID = #{commodityId,jdbcType=INTEGER}
+    </select>
+  <select id="checkCommentsByUserId" resultType="com.shop.demo.entity.Comments">
+    select *
+      from comments
+      where user_ID = #{userId,jdbcType=INTEGER}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="com.shop.demo.entity.CommentsKey">
     delete from comments
     where commodity_ID = #{commodityId,jdbcType=INTEGER}
