@@ -49,6 +49,9 @@ public class commodityController {
     }
 
     @ApiOperation("添加商品信息")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "sellerId",required = true)
+    })
     @PostMapping("/add")
     public int addCommodity(Commodity commodity){
         return commodityservice.addCommodity(commodity);
