@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.shop.demo.Dao.UserDao">
   <resultMap id="BaseResultMap" type="com.shop.demo.entity.User">
-    <id column="ID" jdbcType="DECIMAL" property="id" />
+    <id column="ID" jdbcType="INTEGER" property="id" />
     <result column="name" jdbcType="CHAR" property="name" />
     <result column="salt" jdbcType="CHAR" property="salt" />
     <result column="e_mail" jdbcType="CHAR" property="eMail" />
@@ -18,11 +18,11 @@
     ID, `name`, salt, e_mail, register_time, last_login_time, photo, account, `password`, 
     phone_number, address
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.math.BigDecimal" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from user
-    where ID = #{id,jdbcType=DECIMAL}
+    where ID = #{id,jdbcType=INTEGER}
   </select>
   <select id="selectByAccountAndPassword" parameterType="com.shop.demo.entity.User" resultMap="BaseResultMap">
     select
@@ -40,12 +40,16 @@
     select
     <include refid="Base_Column_List" />
     from user
-    where phone_number = #{phoneNumber,jdbcType=DECIMAL} and password = #{password,jdbcType=CHAR}
+    where phone_number = #{phoneNumber,jdbcType=INTEGER} and password = #{password,jdbcType=CHAR}
+  </select>
+  <select id="checkAllUserInfo" resultType="com.shop.demo.entity.User">
+    select ID, `name`, salt, e_mail, photo, account, phone_number
+    from user
   </select>
 
-  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from user
-    where ID = #{id,jdbcType=DECIMAL}
+    where ID = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" keyColumn="ID" keyProperty="id" parameterType="com.shop.demo.entity.User" useGeneratedKeys="true">
     insert into user (`name`, salt, e_mail, register_time, 
@@ -158,7 +162,7 @@
         address = #{address,jdbcType=CHAR},
       </if>
     </set>
-    where ID = #{id,jdbcType=DECIMAL}
+    where ID = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.shop.demo.entity.User">
     update user
@@ -172,6 +176,6 @@
       `password` = #{password,jdbcType=CHAR},
       phone_number = #{phoneNumber,jdbcType=DECIMAL},
       address = #{address,jdbcType=CHAR}
-    where ID = #{id,jdbcType=DECIMAL}
+    where ID = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

@@ -9,7 +9,7 @@ import java.util.Date;
  * @author 
  */
 public class User implements Serializable {
-    private BigDecimal id;
+    private int id;
 
     private String name;
 
@@ -33,11 +33,11 @@ public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    public BigDecimal getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(BigDecimal id) {
+    public void setId(int id) {
         this.id = id;
     }
 
