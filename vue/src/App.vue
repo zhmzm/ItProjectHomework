@@ -1,27 +1,19 @@
 <template>
   <el-menu
-      :default-active="activeIndex"
       class="el-menu-demo"
       mode="horizontal"
-      @select="handleSelect"
       id="header"
       style="z-index: 999; background-color: RGBA(64,158,255,0.05);"
   >
     <el-menu-item index="1" @click="gotoHome" >主页</el-menu-item>
     <el-sub-menu index="2">
-      <template #title>商城</template>
-      <el-menu-item index="2-1">选项1</el-menu-item>
-      <el-menu-item index="2-2">选项2</el-menu-item>
-      <el-menu-item index="2-3">选项3</el-menu-item>
-      <el-sub-menu index="2-4">
-        <template #title>选项4</template>
-        <el-menu-item index="2-4-1">选项1</el-menu-item>
-        <el-menu-item index="2-4-2">选项2</el-menu-item>
-        <el-menu-item index="2-4-3">选项3</el-menu-item>
-      </el-sub-menu>
+      <template #title>个人中心</template>
+      <el-menu-item index="2-1">个人信息</el-menu-item>
+      <el-menu-item index="2-2" @click="gotoShoppingCart">购物车</el-menu-item>
     </el-sub-menu>
-    <el-menu-item index="3">个人中心</el-menu-item>
+    <el-menu-item index="3" @click="gotoShop">商城</el-menu-item>
     <el-menu-item index="4" @click="gotoLoginAndRegister">注册登录</el-menu-item>
+    <el-menu-item index="5" @click="gotoAdministrator" style="margin-right: 10px; margin-left: auto">后台管理</el-menu-item>
   </el-menu>
   <div class="line"></div>
 
@@ -39,6 +31,15 @@ export default {
     },
     gotoHome(){
       this.$router.replace('/')
+    },
+    gotoShop(){
+      this.$router.replace('/shop')
+    },
+    gotoAdministrator(){
+      this.$router.replace('/administrator')
+    },
+    gotoShoppingCart(){
+      this.$router.replace('/shoppingcart')
     }
   },
 }
