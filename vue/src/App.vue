@@ -30,6 +30,7 @@ export default {
       this.$router.replace('/loginandregister')
     },
     gotoHome(){
+<<<<<<< HEAD
       this.$router.replace('/')
     },
     gotoShop(){
@@ -40,6 +41,9 @@ export default {
     },
     gotoShoppingCart(){
       this.$router.replace('/shoppingcart')
+=======
+      this.$router.replace('/Shop')
+>>>>>>> 0c495a69441cacc5e84fb670dd3842baf03887a9
     }
   },
 }

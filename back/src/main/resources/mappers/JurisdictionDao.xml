@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shop.demo.Dao.JurisdictionDao">
+  <resultMap id="BaseResultMap" type="com.shop.demo.entity.Jurisdiction">
+    <id column="user_ID" jdbcType="INTEGER" property="userId" />
+    <result column="seller_power" jdbcType="INTEGER" property="sellerPower" />
+    <result column="administrator_power" jdbcType="INTEGER" property="administratorPower" />
+    <result column="seller_start" jdbcType="TIMESTAMP" property="sellerStart" />
+    <result column="administrator_start" jdbcType="TIMESTAMP" property="administratorStart" />
+    <result column="c1" jdbcType="VARCHAR" property="c1" />
+    <result column="c2" jdbcType="VARCHAR" property="c2" />
+    <result column="c3" jdbcType="VARCHAR" property="c3" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    user_ID, seller_power, administrator_power, seller_start, administrator_start, c1, 
+    c2, c3
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from jurisdiction
+    where user_ID = #{userId,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultType="com.shop.demo.entity.Jurisdiction">
+    select *
+    from jurisdiction
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from jurisdiction
+    where user_ID = #{userId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="user_ID" keyProperty="userId" parameterType="com.shop.demo.entity.Jurisdiction" useGeneratedKeys="true">
+    insert into jurisdiction (seller_power, administrator_power, 
+      seller_start, administrator_start, c1, 
+      c2, c3)
+    values (#{sellerPower,jdbcType=INTEGER}, #{administratorPower,jdbcType=INTEGER}, 
+      #{sellerStart,jdbcType=TIMESTAMP}, #{administratorStart,jdbcType=TIMESTAMP}, #{c1,jdbcType=VARCHAR}, 
+      #{c2,jdbcType=VARCHAR}, #{c3,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="user_ID" keyProperty="userId" parameterType="com.shop.demo.entity.Jurisdiction" useGeneratedKeys="true">
+    insert into jurisdiction
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        user_ID,
+      </if>
+      <if test="sellerPower != null">
+        seller_power,
+      </if>
+      <if test="administratorPower != null">
+        administrator_power,
+      </if>
+      <if test="sellerStart != null">
+        seller_start,
+      </if>
+      <if test="administratorStart != null">
+        administrator_start,
+      </if>
+      <if test="c1 != null">
+        c1,
+      </if>
+      <if test="c2 != null">
+        c2,
+      </if>
+      <if test="c3 != null">
+        c3,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="sellerPower != null">
+        #{sellerPower,jdbcType=INTEGER},
+      </if>
+      <if test="administratorPower != null">
+        #{administratorPower,jdbcType=INTEGER},
+      </if>
+      <if test="sellerStart != null">
+        #{sellerStart,jdbcType=TIMESTAMP},
+      </if>
+      <if test="administratorStart != null">
+        #{administratorStart,jdbcType=TIMESTAMP},
+      </if>
+      <if test="c1 != null">
+        #{c1,jdbcType=VARCHAR},
+      </if>
+      <if test="c2 != null">
+        #{c2,jdbcType=VARCHAR},
+      </if>
+      <if test="c3 != null">
+        #{c3,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.shop.demo.entity.Jurisdiction">
+    update jurisdiction
+    <set>
+      <if test="sellerPower != null">
+        seller_power = #{sellerPower,jdbcType=INTEGER},
+      </if>
+      <if test="administratorPower != null">
+        administrator_power = #{administratorPower,jdbcType=INTEGER},
+      </if>
+      <if test="sellerStart != null">
+        seller_start = #{sellerStart,jdbcType=TIMESTAMP},
+      </if>
+      <if test="administratorStart != null">
+        administrator_start = #{administratorStart,jdbcType=TIMESTAMP},
+      </if>
+      <if test="c1 != null">
+        c1 = #{c1,jdbcType=VARCHAR},
+      </if>
+      <if test="c2 != null">
+        c2 = #{c2,jdbcType=VARCHAR},
+      </if>
+      <if test="c3 != null">
+        c3 = #{c3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where user_ID = #{userId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.shop.demo.entity.Jurisdiction">
+    update jurisdiction
+    set seller_power = #{sellerPower,jdbcType=INTEGER},
+      administrator_power = #{administratorPower,jdbcType=INTEGER},
+      seller_start = #{sellerStart,jdbcType=TIMESTAMP},
+      administrator_start = #{administratorStart,jdbcType=TIMESTAMP},
+      c1 = #{c1,jdbcType=VARCHAR},
+      c2 = #{c2,jdbcType=VARCHAR},
+      c3 = #{c3,jdbcType=VARCHAR}
+    where user_ID = #{userId,jdbcType=INTEGER}
+  </update>
+</mapper>

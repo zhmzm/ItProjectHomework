@@ -11,11 +11,19 @@
   
  <!-- //页面body -->
    <el-main class="item_list">
+<<<<<<< HEAD
 	   	<div class="background"></div>
 	   <el-button class="item" v-for="item in this.allItem"  shadow="hover">
 		   <router-link :to="{path:'/shop/detail', query:{id:item.id}}">
 		   <div>
          <img class="item_img"  :src="'http://192.168.137.43/' + item.address"/>
+=======
+	   	<div class="background" style="note"></div>
+	   <el-button class="item" v-for="item in this.allItem"  shadow="hover">
+		   <router-link :to="{path:'/Shop/details', query:{productID:item.id}}">
+		   <div >
+               <img class="item_img"  :src="'http://192.168.137.43/' + item.address"/>
+>>>>>>> 0c495a69441cacc5e84fb670dd3842baf03887a9
 		   </div>
 	   		 <div class="item_detail">
 	   				<p>{{item.name}}</p>
@@ -70,6 +78,10 @@ export default {
            formDataDetail.append('id', this.allID[i]);
          await axios.post("http://localhost:8080/api/commodity/check", formDataDetail).then(res =>{
 			 this.tempObj = res.data;
+<<<<<<< HEAD
+=======
+			 //console.log(res.data)
+>>>>>>> 0c495a69441cacc5e84fb670dd3842baf03887a9
            });
            formDataDetail.delete('id');
 		   
@@ -78,10 +90,19 @@ export default {
 		   formDataPhoto.append('commodityID', this.allID[i]);
 		await axios.post("http://localhost:8080/api/commodity/photo", formDataPhoto).then(res =>{
 				this.tempObj.address = res.data[0].address;
+<<<<<<< HEAD
 				this.allItem.push(this.tempObj);
 		   });
 		   formDataPhoto.delete('commodityID');
          }
+=======
+				console.log(res.data)
+				this.allItem.push(this.tempObj);
+		   });
+		   formDataPhoto.delete('commodityID');
+         }	 
+		 console.log(this.allItem);
+>>>>>>> 0c495a69441cacc5e84fb670dd3842baf03887a9
        });
  },
  
