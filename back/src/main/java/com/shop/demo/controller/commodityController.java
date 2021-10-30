@@ -48,7 +48,7 @@ public class commodityController {
         return commodity;
     }
 
-    @ApiOperation("添加商品信息")
+    @ApiOperation("添加商品信息-返回值是商品id")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "sellerId",required = true)
     })
