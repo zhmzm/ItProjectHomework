@@ -1,7 +1,10 @@
 package com.shop.demo.controller;
 
+import com.shop.demo.entity.Picture;
+import com.shop.demo.service.photoService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -49,5 +52,16 @@ public class imgController {
             e.printStackTrace();
         }
         return "personalImg/"+newFileName;
+    }
+    @Autowired
+    photoService photoService;
+    @ApiOperation("更新图片库消息")
+    @PostMapping("/updateInfo")
+    public int updatePicture(int commodityId, String picAdress, short picSlot){
+        Picture addPicture = new Picture();
+        addPicture.setCommodityId(commodityId);
+        addPicture.setAddress(picAdress);
+        addPicture.setSlot(picSlot);
+        return photoService.addPicture(addPicture);
     }
 }
