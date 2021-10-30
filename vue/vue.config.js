@@ -4,7 +4,7 @@ module.exports = {
     devServer: {
         proxy: {
             '/api': {
-                target: 'http://192.168.137.43:8081/', //对应服务器地址
+                target: 'http://106.52.23.196:8081/', //对应服务器地址
 
                 changeOrigin: true, //允许跨域
 

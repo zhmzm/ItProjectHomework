@@ -1,12 +1,18 @@
 import { createStore } from 'vuex'
 
+
+// Create a new store instance.
 export default createStore({
-  state: {
+  state () {
+    return {
+      user: '',
+      imageAddress: 'https://xuenihongzhao.info/'
+    }
   },
   mutations: {
-  },
-  actions: {
-  },
-  modules: {
+    setUser (state, data) {
+      state.user = data;
+    },
   }
 })
+

@@ -1,8 +1,6 @@
 <template>
   <div class="home">
   </div>
-
-
 </template>
 
 <script>
@@ -16,6 +14,19 @@ export default {
 	  }
   }  
 
+<<<<<<< HEAD
+  },
+  data(){
+    return{
+
+    }
+  },
+  methods: {
+
+  }
+}
+=======
+>>>>>>> 0c495a69441cacc5e84fb670dd3842baf03887a9
 </script>
 
 <style scoped>

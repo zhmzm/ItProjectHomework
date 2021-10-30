@@ -22,10 +22,14 @@ export default {
       formData.append('account', this.LoginUser.userId)
       formData.append('password',this.LoginUser.userPassword)
       axios.post("http://localhost:8080/api/user/check", formData).then(res => {
-        if (res.data === 1) {
-          alert('成功')
+        if (res.data === 0) {
+          alert('登录失败')
         } else {
-          alert('失败')
+          let formData1 = new FormData();
+          formData1.append('userId', res.data)
+          axios.post("http://localhost:8080/api/userInfo/checkInfo", formData1).then(res => {
+            this.$store.commit('setUser', res.data);
+          })
         }
       })
     }

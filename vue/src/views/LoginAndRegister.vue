@@ -8,9 +8,6 @@
       <img src="../assets/login/LoginImg1.jpg" alt="">
     </div>
 
-
-
-
     <div class="verticalBar"></div>
     <div class="login">
       <div class="choise">
@@ -21,10 +18,6 @@
     </div>
   </div>
 
-
-  <div class="footer">
-    <el-button type="primary" plain>团队</el-button>
-  </div>
 </template>
 
 <script>
@@ -58,14 +51,14 @@ export default {
 }
 .verticalBar {
   border-right: 1px solid RGBA(64,158,255,0.5);
-  height: 300px;
+  height: 380px;
   margin-top: 28px;
 }
 .horizontalBar{
   width: 980px;
   height: 28px;
   margin: 0 auto;
-  margin-top: 100px;
+  margin-top: 50px;
   border-bottom: 1px solid RGBA(64,158,255,0.5);
   margin-bottom: 28px;
   text-align: center;
@@ -81,11 +74,5 @@ export default {
 
   color: black;
   text-decoration: none;
-}
-.footer{
-  height: 75px;
-  padding: 25px 0;
-  bottom: 0px;
-  background-color: RGBA(64,158,255,0.05);
 }
 </style>
