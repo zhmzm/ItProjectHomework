@@ -18,17 +18,44 @@
     </div>
   </div>
 
+  <el-dialog
+      title="提示"
+      v-model="logInDialogVisible"
+      :visible.sync="logInDialogVisible"
+      width="30%">
+    <div style="margin-bottom: 30px">您已登录成功，无需再次登录！</div>
+    <span slot="footer" class="dialog-footer">
+            <el-button type="primary" @click="gotoHome">确 定</el-button>
+            <el-button @click="gotoHome">取 消</el-button>
+            </span>
+  </el-dialog>
+
 </template>
 
 <script>
 export default {
   name: "LoginAndRegister",
+  data(){
+    return{
+      logInDialogVisible: false,
+    }
+  },
   methods: {
     gotoLogin: function(){
       this.$router.replace('/loginandregister/login')
     },
     gotoRegister: function(){
       this.$router.replace('/loginandregister/register')
+    },
+    gotoHome(){
+      this.logInDialogVisible = false;
+      this.$router.replace('/');
+    },
+  },
+  created() {
+     console.log(this.$store.state.login)
+    if(this.$store.state.login === 1){
+      this.logInDialogVisible = true;
     }
   }
 }

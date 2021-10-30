@@ -29,11 +29,15 @@ export default {
           formData1.append('userId', res.data)
           axios.post("http://localhost:8080/api/userInfo/checkInfo", formData1).then(res => {
             this.$store.commit('setUser', res.data);
+            this.$store.commit('setLogin', 1);
+            this.$router.replace('/');
           })
         }
       })
-    }
-  }
+    },
+
+  },
+
 }
 </script>
 

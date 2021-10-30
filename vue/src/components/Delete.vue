@@ -51,6 +51,21 @@ export default {
   },
 
   created () {
+    if(this.$store.state.login === 0){
+      alert('请先登录！');
+      this.$router.replace('/administrator');
+    }
+    else{
+      let formData1 = new FormData();
+      formData1.append('userId', this.$store.state.user.id.toString())
+      axios.post("http://localhost:8080/api/jurisdiction/check", formData1).then(res => {
+        if(res.data.sellerPower !== 1 && res.data.administratorPower !== 1){
+          alert('您没有权限进入此界面。');
+          this.$router.replace('/administrator');
+        }
+      })
+    }
+
     axios.post("http://localhost:8080/api/commodity/shoplist").then(async res =>{
       this.allID = res.data;
       for(let i = 0; i < this.allID.length; i++){

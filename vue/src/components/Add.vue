@@ -22,30 +22,33 @@
       <el-form-item label="商品图片" :label-width="formLabelWidth" style="margin-left: 120px">
         <el-upload
             ref="upload"
-            action="#"
+            action="http://localhost:8080/api/file/CommodityImg"
             accept="image/png,image/gif,image/jpg,image/jpeg"
             list-type="picture-card"
-            :limit=limitNum
             :auto-upload="false"
-            :on-exceed="handleExceed"
-            :before-upload="handleBeforeUpload"
-            :on-preview="handlePictureCardPreview"
-            :on-remove="handleRemove">
+            :before-upload="handleBeforeUpload">
           <i class="el-icon-plus"></i>
         </el-upload>
-        <el-dialog :visible.sync="dialogVisible">
-          <img width="100%" :src="dialogImageUrl" alt="">
-        </el-dialog>
+
+
       </el-form-item>
       <el-form-item>
         <el-button size="small" type="primary" @click="postToDatabase">立即上传</el-button>
+          <el-dialog
+            title="提示"
+            v-model="afterDialogVisible"
+            :visible.sync="afterDialogVisible"
+            width="30%">
+            <div style="margin-bottom: 30px">添加成功</div>
+            <span slot="footer" class="dialog-footer">
+            <el-button type="primary" @click="afterClick">确 定</el-button>
+            <el-button @click="afterClick">取 消</el-button>
+            </span>
+          </el-dialog>
         <el-button size="small">取消</el-button>
       </el-form-item>
     </el-form>
   </div>
-
-
-
 
 </template>
 
@@ -56,11 +59,8 @@ export default {
   name: "Add",
   data() {
     return {
-      successPostDialog: false,
-      dialogImageUrl: '',
-      dialogVisible: false,
+      afterDialogVisible: false,
       formLabelWidth: '80px',
-      limitNum: 3,
       form: {
         name: '',
         description: '',
@@ -80,28 +80,12 @@ export default {
           message: '请上传格式为image/png, image/gif, image/jpg, image/jpeg的图片'
         })
       }
-      let size = file.size / 1024 / 1024 / 2
-      if(size > 2) {
-        this.$notify.warning({
-          title: '警告',
-          message: '图片大小必须小于2M'
-        })
-      }
     },
-    // 文件超出个数限制时的钩子
-    handleExceed(files, fileList) {
 
-    },
-    // 文件列表移除文件时的钩子
-    handleRemove(file, fileList) {
-      console.log(file, fileList);
-    },
-    // 点击文件列表中已上传的文件时的钩子
-    handlePictureCardPreview(file) {
-      this.dialogImageUrl = file.url;
-      this.dialogVisible = true;
-    },
+
     postToDatabase() {
+      this.$refs.upload.submit();
+      this.afterDialogVisible = true;
       let formData = new FormData();
       formData.append('description', this.form.description)
       formData.append('discount', parseFloat(this.form.discount))
@@ -110,8 +94,27 @@ export default {
       formData.append('prise', parseFloat(this.form.price))
       formData.append('sellerId','1')
       axios.post("http://localhost:8080/api/commodity/add", formData).then(res => {
-        if(res.data === 1){
 
+      })
+    },
+    afterClick(){
+      this.afterDialogVisible = false;
+      location.reload();
+    },
+
+  },
+  created: function () {
+    if(this.$store.state.login === 0){
+      alert('请先登录！');
+      this.$router.replace('/administrator');
+    }
+    else{
+      let formData1 = new FormData();
+      formData1.append('userId', this.$store.state.user.id.toString())
+      axios.post("http://localhost:8080/api/jurisdiction/check", formData1).then(res => {
+        if(res.data.sellerPower !== 1 && res.data.administratorPower !== 1){
+          alert('您没有权限进入此界面。');
+          this.$router.replace('/administrator');
         }
       })
     }

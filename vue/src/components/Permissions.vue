@@ -63,30 +63,30 @@ export default {
         axios.post("http://localhost:8080/api/jurisdiction/del", delFormData).then(async res => {
           let formData1 = new FormData();
           if(choise === 1){
-            location.reload();
+            await location.reload();
           }
           else if(choise === 2){
             formData1.append('administratorPower', '0')
             formData1.append('sellerPower', '1')
             formData1.append('userId', this.nowUser);
-            await axios.post("http://localhost:8080/api/jurisdiction/add", formData1).then(res => {
-              location.reload();
+            await axios.post("http://localhost:8080/api/jurisdiction/add", formData1).then(async res => {
+              await location.reload();
             })
           }
           else if(choise === 3){
             formData1.append('administratorPower', '1')
             formData1.append('sellerPower', '0')
             formData1.append('userId', this.nowUser);
-            await axios.post("http://localhost:8080/api/jurisdiction/add", formData1).then(res => {
-              location.reload();
+            await axios.post("http://localhost:8080/api/jurisdiction/add", formData1).then(async res => {
+              await location.reload();
             })
           }
           else if(choise === 4){
             formData1.append('administratorPower', '1')
             formData1.append('sellerPower', '1')
             formData1.append('userId', this.nowUser);
-            await axios.post("http://localhost:8080/api/jurisdiction/add", formData1).then(res => {
-              location.reload();
+            await axios.post("http://localhost:8080/api/jurisdiction/add", formData1).then(async res => {
+              await location.reload();
             })
           }
 
@@ -99,30 +99,46 @@ export default {
           formData2.append('administratorPower', '0')
           formData2.append('sellerPower', '1')
           formData2.append('userId', this.nowUser);
-          axios.post("http://localhost:8080/api/jurisdiction/add", formData2).then(res => {
-            location.reload();
+          axios.post("http://localhost:8080/api/jurisdiction/add", formData2).then(async res => {
+            await location.reload();
           })
         }else if(choise === 3){
           formData2.append('administratorPower', '1')
           formData2.append('sellerPower', '0')
           formData2.append('userId', this.nowUser);
-          axios.post("http://localhost:8080/api/jurisdiction/add", formData2).then(res => {
-            location.reload();
+          axios.post("http://localhost:8080/api/jurisdiction/add", formData2).then(async res => {
+            await location.reload();
           })
         }
         else if(choise === 4){
           formData2.append('administratorPower', '1')
           formData2.append('sellerPower', '1')
           formData2.append('userId', this.nowUser);
-          axios.post("http://localhost:8080/api/jurisdiction/add", formData2).then(res => {
-            location.reload();
+          axios.post("http://localhost:8080/api/jurisdiction/add", formData2).then(async res => {
+            await location.reload();
           })
         }
       }
+
     },
   },
 
   created () {
+    if(this.$store.state.login === 0){
+      alert('请先登录！');
+      this.$router.replace('/administrator');
+    }
+    else{
+      let formData1 = new FormData();
+      formData1.append('userId', this.$store.state.user.id.toString())
+      axios.post("http://localhost:8080/api/jurisdiction/check", formData1).then(res => {
+        if(res.data.administratorPower !== 1){
+          alert('您没有权限进入此界面。');
+          this.$router.replace('/administrator');
+        }
+      })
+    }
+
     axios.post("http://localhost:8080/api/userInfo/checkAll").then(async res =>{
       this.allUser = res.data;
       for(let i = 0; i < this.allUser.length; i++){
