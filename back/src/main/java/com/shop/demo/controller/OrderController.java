@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Date;
 import java.util.List;
 
 @Api(value="订单接口",tags={"订单接口"})
@@ -29,6 +30,8 @@ public class OrderController {
     })
     @PostMapping("/add")
     public int addNewOrder(Orderlist newOrder){
+        Date date = new Date();
+        newOrder.setTime(date);
         return orderService.addNewOrder(newOrder);
     }
 
