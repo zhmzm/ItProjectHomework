@@ -1,7 +1,9 @@
 package com.shop.demo.controller;
 
 import com.shop.demo.entity.Jurisdiction;
+import com.shop.demo.entity.Seller;
 import com.shop.demo.service.jurisdictionService;
+import com.shop.demo.service.sellerService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -21,11 +23,14 @@ public class jurisdictionController {
     @Autowired
     jurisdictionService jurisdictionService;
 
-    @ApiOperation("新增权限")
+    @Autowired
+    sellerService sellerService;
+
+    @ApiOperation("新增权限-自动创建新商家并返回商家id")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "userId",required = true),
-            @ApiImplicitParam(name = "sellerPower",value = "可选选项",required = true),
-            @ApiImplicitParam(name = "administratorPower",required = true,value = "可选选项"),
+            @ApiImplicitParam(name = "sellerPower",value = "可选选项"),
+            @ApiImplicitParam(name = "administratorPower",value = "可选选项"),
     })
     @PostMapping("/add")
     public int addNewJurisdiction(Jurisdiction newJurisdiction){
@@ -35,11 +40,18 @@ public class jurisdictionController {
         }
         else {
             newJurisdiction.setSellerStart(date);
+            Seller sellerInfo = new Seller();
+            sellerInfo.setName("need a name");
+            int newSellerId = sellerService.addSeller(sellerInfo);
+            newJurisdiction.setSellerPower(newSellerId);
+            jurisdictionService.addNewJurisdiction(newJurisdiction);
+            return newSellerId;
         }
         return jurisdictionService.addNewJurisdiction(newJurisdiction);
     }
 
     @ApiOperation("删除权限")
+    @ApiImplicitParam(name = "userId",value = "只需要用户id",required = true)
     @PostMapping("/del")
     public int delJurisdiction(Jurisdiction delJurisdiction){
         return jurisdictionService.delJurisdiction(delJurisdiction);
@@ -53,7 +65,7 @@ public class jurisdictionController {
         return jurisdictionService.checkJurisdiction(userId);
     }
     @ApiOperation("查询所有高级权限")
-    @PostMapping("/checkall")
+    @PostMapping("/checkAll")
     public List<Jurisdiction> checkJurisdiction(){
         return jurisdictionService.checkAllJurisdiction();
     }
