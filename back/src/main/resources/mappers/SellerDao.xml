@@ -20,7 +20,11 @@
     from seller
     where ID = #{id,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <select id="getAllSeller" resultType="com.shop.demo.entity.Seller">
+      select *
+      from seller
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from seller
     where ID = #{id,jdbcType=INTEGER}
   </delete>
