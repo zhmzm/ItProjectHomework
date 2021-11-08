@@ -9,6 +9,7 @@ public interface commodityService {
     int addCommodity(Commodity addCommodity);
     int delCommodity(Commodity delCommodity);
     Commodity checkCommodityWithPhoto(Commodity checkCommodity);
+    List<Commodity> getAllCommodityBySellerId(int sellerId);
 
     List<String> getAllCommodity();
 }

@@ -77,4 +77,10 @@ public class commodityController {
         return commodityservice.getAllCommodity();
     }
 
+    @ApiOperation("查询卖家下所有商品")
+    @PostMapping("/getAllCommodityBySellerId")
+    public List<Commodity> getAllCommodityBySellerId(int sellerId){
+        return commodityservice.getAllCommodityBySellerId(sellerId);
+    }
+
 }

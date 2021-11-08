@@ -20,4 +20,6 @@ public interface CommodityDao {
     int updateByPrimaryKey(Commodity record);
 
     List<String> getAllId();
+
+    List<Commodity> getAllCommodityBySellerId(int sellerId);
 }

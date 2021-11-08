@@ -36,6 +36,11 @@ public class commodityServiceImpl implements commodityService {
     }
 
     @Override
+    public List<Commodity> getAllCommodityBySellerId(int sellerId) {
+        return commodityDao.getAllCommodityBySellerId(sellerId);
+    }
+
+    @Override
     public List<String> getAllCommodity() {
         //现在redis里面查
         //查不到再从数据库里面找，然后放到redis里面
