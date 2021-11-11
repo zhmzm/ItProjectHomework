@@ -15,6 +15,11 @@
     <el-menu-item index="4" @click="gotoLoginAndRegister">注册登录</el-menu-item>
     <el-menu-item index="5" @click="logOutDialog">退出登录</el-menu-item>
     <el-menu-item index="6" @click="gotoAdministrator" style="margin-right: 10px; margin-left: auto">后台管理</el-menu-item>
+    <el-sub-menu index="7">
+      <template #title>卖家中心</template>
+      <el-menu-item index="7-1" @click="gttoBusinessMessage">商家信息</el-menu-item>
+    </el-sub-menu>
+    <el-menu-item index="8" @click="gotoComments">评价</el-menu-item>
   </el-menu>
   <div class="line"></div>
   <el-dialog
@@ -45,6 +50,9 @@ export default {
     gotoLoginAndRegister: function(){
       this.$router.replace('/loginandregister')
     },
+    gotoComments:function (){
+      this.$router.replace('/comment')
+    },
     gotoHome(){
       this.$router.replace('/')
     },
@@ -59,6 +67,14 @@ export default {
     },
     logOutDialog(){
       this.logOutDialogVisible = true
+    },
+    gotoBusiness:function ()
+    {
+      this.$router.replace('/business')
+    },
+    gttoBusinessMessage:function ()
+    {
+      this.$router.replace('/businessmessage')
     },
     logOut(){
       this.logOutDialogVisible = false

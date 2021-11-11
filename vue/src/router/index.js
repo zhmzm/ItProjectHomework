@@ -8,6 +8,21 @@ const routes = [
     component: Home
   },
   {
+    path:'/comment',
+    name:'comment',
+    component: ()=>import('../views/Comments')
+  },
+  {
+    path:'/businessmessage',
+    name:'businessmessage',
+    component:()=>import('../views/BusinessMessage')
+  },
+  {
+    path:'/business',
+    name:'business',
+    component:()=>import('../views/Business')
+  },
+  {
     path: '/shop',
     name: 'Shop',
     component: () => import('../views/Shop'),
