@@ -28,9 +28,15 @@
         <span>{{ productDetail.inventory }}</span>
       </div>
       <div className="horizontalBar"></div>
-      <el-button type="primary" plain style="margin-right: 75px; width: 150px" @click="gotoHome">加入购物车</el-button>
-      <el-button type="primary" plain style="margin-left: 75px; width: 150px">立即购买</el-button>
+        <router-link :to="{ path: '/comment', query: {id:productDetail.id} }">
+          <el-button type="primary" plain style="margin-right: 90px; width: 100px">查看评论</el-button>
+        </router-link>
+      <el-button type="primary" plain style="margin-right: 45px; width: 100px" @click="addToShoppingCart">加入购物车</el-button>
+      <el-button type="primary" plain style="margin-left: 45px; width: 100px">立即购买</el-button>
     </div>
+      <router-link :to="{ path: '/business', query: {id:productDetail.sellerId} }">
+        <el-button type="primary" plain style="width: 100px">查看商家</el-button>
+      </router-link>
   </el-main>
 
 </template>
@@ -47,8 +53,16 @@ export default {
     }
   },
   methods: {
-    gotoHome(){
-      this.$router.replace('/')
+    addToShoppingCart(){
+      let formDataCommodity=new FormData
+      formDataCommodity.append("commodityId",this.productDetail.id)
+      formDataCommodity.append("createPrice",this.productDetail.prise*this.productDetail.discount)
+      formDataCommodity.append("userId",this.$route.query.id)
+      formDataCommodity.append("num","1")
+      axios.post("http://localhost:8080/api/shopCart/addCartList",formDataCommodity).then(res=>{
+        if(res.data===1)
+          alert('成功')
+      })
     },
   },
   created: function () {
