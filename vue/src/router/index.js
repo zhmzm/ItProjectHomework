@@ -18,6 +18,16 @@ const routes = [
     component:()=>import('../views/BusinessMessage')
   },
   {
+	  path:'/Information',
+	  name:'Information',
+	  component:()=>import('../views/Information')
+  },
+  {
+  	  path:'/Myorder',
+  	  name:'Myorder',
+  	  component:()=>import('../views/Myorder')
+  },
+  {
     path:'/business',
     name:'business',
     component:()=>import('../views/Business')
