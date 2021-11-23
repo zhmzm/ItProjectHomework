@@ -3,7 +3,7 @@
     <div className="productImage" v-if="imgURL.length>1">
       <el-carousel height="560px" indicator-position="outside">
         <el-carousel-item v-for="item in imgURL" :key="item">
-          <img style="height:560px;" :src="'http://192.168.137.43/' + item.address"/>
+          <img style="height:560px;" :src="'https://xuenihongzhao.info/' + item.address"/>
         </el-carousel-item>
       </el-carousel>
     </div>

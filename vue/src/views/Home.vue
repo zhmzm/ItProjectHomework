@@ -1,7 +1,7 @@
 <template>
   <div class="home">
+    <img style="height: 620px; width: 1390px" src="../assets/homeBackground.jpg" alt="">
   </div>
-  <input type="button" @click="testFunc">test
 </template>
 
 <script>
@@ -16,9 +16,7 @@ export default {
     }
   },
   methods: {
-    testFunc(){
-      alert(this.$store.state.login)
-    },
+
   },
   created() {
 

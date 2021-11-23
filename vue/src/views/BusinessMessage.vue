@@ -67,12 +67,6 @@
       </div>
     </div>
   </div>
-  <div v-else>
-    <div class="notBusiness">
-      <p>你还不是商家</p>
-    </div>
-
-  </div>
 </template>
 
 <script>
@@ -145,7 +139,8 @@ export default {
       }
       else
       {
-        this.isBusiness=false
+        alert("您不是商家")
+        this.$router.replace('/')
       }
     })
 

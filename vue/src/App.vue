@@ -20,7 +20,6 @@
       <template #title>卖家中心</template>
       <el-menu-item index="7-1" @click="gttoBusinessMessage">商家信息</el-menu-item>
     </el-sub-menu>
-    <el-menu-item index="8" @click="gotoComments">评价</el-menu-item>
   </el-menu>
   <div class="line"></div>
   <el-dialog

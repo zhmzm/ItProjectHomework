@@ -15,7 +15,7 @@
 	   <el-button class="item" v-for="item in this.allItem"  shadow="hover">
 		   <router-link :to="{path:'/shop/detail', query:{id:item.id}}">
 		   <div>
-         <img class="item_img"  :src="'http://192.168.137.43/' + item.address"/>
+         <img class="item_img"  :src="'https://xuenihongzhao.info/' + item.address"/>
 		   </div>
 	   		 <div class="item_detail">
 	   				<p>{{item.name}}</p>
@@ -82,6 +82,7 @@ export default {
 		   });
 		   formDataPhoto.delete('commodityID');
          }
+      console.log(this.allItem)
        });
  },
  
@@ -184,7 +185,7 @@ export default {
 	  text-decoration: none;
 }
 
-.item_list>.item>.item_img{
+.item_img{
   width: 100%;
   height: 230px;
   vertical-align: top;
