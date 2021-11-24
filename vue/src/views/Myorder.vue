@@ -49,7 +49,7 @@
 </template>
 
 <script>
-	import axios from "axios"
+	import axios from "../axios/axios"
 	
 	export default{
 		name: "Myorder",
@@ -78,7 +78,7 @@
 	created () {
 		let formdata = new FormData();
 		formdata.append('UserId',this.$store.state.user.id)
-	 axios.post("http://localhost:8080/api/order/getIdByUserId/",formdata).then(res =>{
+	 axios.post("/order/getIdByUserId/",formdata).then(res =>{
 			this.myorder = res.data;
 			console.log(this.myorder);
 		})

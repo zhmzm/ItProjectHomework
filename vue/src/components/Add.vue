@@ -22,7 +22,7 @@
       <el-form-item label="商品图片" :label-width="formLabelWidth" style="margin-left: 120px">
         <el-upload
             ref="upload"
-            action="http://localhost:8080/api/file/CommodityImg"
+            action="http://106.52.23.196:8081/api/file/CommodityImg"
             accept="image/png,image/gif,image/jpg,image/jpeg"
             list-type="picture-card"
             :auto-upload="false"
@@ -53,7 +53,7 @@
 </template>
 
 <script>
-import axios from "axios";
+import axios from "../axios/axios";
 
 export default {
   name: "Add",
@@ -93,7 +93,7 @@ export default {
       formData.append('name', this.form.name)
       formData.append('prise', parseFloat(this.form.price))
       formData.append('sellerId','1')
-      axios.post("http://localhost:8080/api/commodity/add", formData).then(res => {
+      axios.post("/commodity/add", formData).then(res => {
 
       })
     },
@@ -111,7 +111,7 @@ export default {
     else{
       let formData1 = new FormData();
       formData1.append('userId', this.$store.state.user.id.toString())
-      axios.post("http://localhost:8080/api/jurisdiction/check", formData1).then(res => {
+      axios.post("/jurisdiction/check", formData1).then(res => {
         if(res.data.sellerPower !== 1 && res.data.administratorPower !== 1){
           alert('您没有权限进入此界面。');
           this.$router.replace('/administrator');

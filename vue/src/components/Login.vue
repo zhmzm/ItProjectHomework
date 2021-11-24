@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import axios from "axios";
+import axios from "../axios/axios";
 export default {
   name: "Login",
   data() {
@@ -21,13 +21,13 @@ export default {
       let formData = new FormData();
       formData.append('account', this.LoginUser.userId)
       formData.append('password',this.LoginUser.userPassword)
-      axios.post("http://localhost:8080/api/user/check", formData).then(res => {
+      axios.post("/user/check", formData).then(res => {
         if (res.data === 0) {
           alert('登录失败')
         } else {
           let formData1 = new FormData();
           formData1.append('userId', res.data)
-          axios.post("http://localhost:8080/api/userInfo/checkInfo", formData1).then(res => {
+          axios.post("/userInfo/checkInfo", formData1).then(res => {
             this.$store.commit('setUser', res.data);
             this.$store.commit('setLogin', 1);
             this.$router.replace('/');

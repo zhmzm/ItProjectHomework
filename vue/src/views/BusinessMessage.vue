@@ -70,7 +70,7 @@
 </template>
 
 <script>
-import axios from "axios";
+import axios from "../axios/axios";
 
 export default {
   data(){
@@ -94,7 +94,7 @@ export default {
       formDataUpdate.append("eMail",this.message.eMail)
       formDataUpdate.append("phoneNumber",this.message.phoneNumber)
       formDataUpdate.append("name",this.message.name)
-      axios.post("http://localhost:8080/api/seller/update",formDataUpdate).then(res=>{
+      axios.post("/seller/update",formDataUpdate).then(res=>{
         if(res.data===1)
         {
           alert('成功')
@@ -105,21 +105,21 @@ export default {
   created() {
     let formdatauser=new FormData()
     formdatauser.append("userId",this.$store.state.user.id)
-    axios.post("http://localhost:8080/api//jurisdiction/check",formdatauser).then(async res=>{
+    axios.post("//jurisdiction/check",formdatauser).then(async res=>{
       console.log(res.data)
       if(res.data.sellerPower>0)
       {
         console.log(res.data)
         let formDataget=new FormData()
         formDataget.append("sellerId",res.data.sellerPower)
-        await axios.post("http://localhost:8080/api/commodity/getAllCommodityBySellerId",formDataget).then(async res=>{
+        await axios.post("/commodity/getAllCommodityBySellerId",formDataget).then(async res=>{
           this.shop=res.data
           for(let i=0;i<this.shop.length;i++)
           {
 
             let formDataProduct = new FormData();
             formDataProduct.append('id', this.shop[i].id);
-            await axios.post("http://localhost:8080/api/commodity/check2", formDataProduct).then(res=>{
+            await axios.post("/commodity/check2", formDataProduct).then(res=>{
               this.temp=this.shop[i]
               this.temp.adress=res.data.description
               console.log(res.data.description)
@@ -131,7 +131,7 @@ export default {
         let formdataSeller=new FormData();
         formdataSeller.append("ID","1");
         formdataSeller.append("sellerId",res.data.sellerPower);
-        axios.post("http://localhost:8080/api/seller/get",formdataSeller).then(res=>{
+        axios.post("/seller/get",formdataSeller).then(res=>{
           this.message=res.data
           this.a=res.data.score
         })

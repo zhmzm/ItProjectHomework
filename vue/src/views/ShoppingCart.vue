@@ -82,9 +82,10 @@
             <span class="total-price-title">合计：</span>
             <span class="total-price">{{getTotalPrice()}}元</span>
           </span>
-          <router-link :to="getCheckNum > 0 ? '/confirmOrder' : ''">
-            <div :class="getCheckNum > 0 ? 'btn-primary' : 'btn-primary-disabled'">去结算</div>
-          </router-link>
+          
+
+			<el-button   @click="addtoMyorder">去结算</el-button>
+
         </div>
       </div>
 
@@ -108,7 +109,6 @@ export default {
       isIndeterminate: true,
       userID:"1",
       shop:"",
-      temp:"",
       tupian:"",
       name:"",
       shoppingCart: []
@@ -119,16 +119,17 @@ export default {
   created() {
     let formData3=new FormData()
     formData3.append('userId',this.$store.state.user.id)
-    axios.post("http://localhost:8080/api/shopCart/getCartList/",formData3).then(async res=>{
+    axios.post("/shopCart/getCartList/",formData3).then(async res=>{
       this.shop=res.data;
       for(let i=0;i<this.shop.length;i++)
       {
 
         let formDataProduct = new FormData();
         formDataProduct.append('id', this.shop[i].commodityId);
-        await axios.post("http://localhost:8080/api/commodity/check2", formDataProduct).then(res=>{
+        await axios.post("/commodity/check2", formDataProduct).then(res=>{
           this.temp=this.shop[i]
           this.temp.description=res.data.description
+		  this.temp.sellerId = res.data.sellerId
           console.log(res.data.description)
           this.temp.name=res.data.name
           this.temp.check=false
@@ -152,6 +153,34 @@ export default {
       }
 
     },
+	
+	addtoMyorder()
+	    {
+			
+	      for (let i = 0; i < this.shoppingCart.length; i++)
+	      {
+			  
+	        const temp =this.shoppingCart[i]
+	        if(temp.check)
+	        {
+			  console.log(temp);
+	          let formdata=new FormData();
+			  console.log(temp.commodityId)
+			  console.log(this.shoppingCart[i].commodityId)
+	          formdata.append("commodityId",this.shoppingCart[i].commodityId);
+	          formdata.append("num",this.shoppingCart[i].num);
+	          formdata.append("sellerId",this.shoppingCart[i].sellerId);
+	          formdata.append('userId',this.$store.state.user.id)
+	          formdata.append("price",this.shoppingCart[i].createPrice);
+			  console.log(formdata);
+	          axios.post("/order/add/",formdata).then(res=>{
+	            if(res.data===1)
+	              alert("添加成功")
+	          })
+	        }
+	      }
+	        },
+	
     setAllCheck()
     {
       this.checkAll=this.handleCheckAllChange()
@@ -180,7 +209,7 @@ export default {
         formDataC.append("id",this.shoppingCart[i].id)
         formDataC.append("num",this.shoppingCart[i].num)
         console.log(this.shoppingCart[i].id)
-        axios.post("http://localhost:8080/api/shopCart/updateCart",formDataC).then(res=>{
+        axios.post("/shopCart/updateCart",formDataC).then(res=>{
         });
         formDataC.delete("id")
         formDataC.delete("num")
@@ -246,7 +275,7 @@ export default {
       let formData1=new FormData();
       formData1.append('id',id)
       console.log(id)
-      axios.post("http://localhost:8080/api/shopCart/delCart",formData1).then(res => {
+      axios.post("/shopCart/delCart",formData1).then(res => {
         if (res.data === 1) {
           this.deleteShoppingCart(id)
           alert('成功')

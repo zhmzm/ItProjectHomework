@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import axios from "axios";
+import axios from "../axios/axios";
 export default {
   name: "Register",
   data() {
@@ -31,7 +31,7 @@ export default {
         formData.append('name',this.RegisterUser.userName)
         formData.append('phoneNumber', parseInt(this.RegisterUser.userPhone))
 
-        axios.post("http://localhost:8080/api/user/add", formData).then(res => {
+        axios.post("/user/add", formData).then(res => {
           alert('成功注册')
         })
       }else{

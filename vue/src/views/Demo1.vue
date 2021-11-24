@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import axios from "axios";
+import axios from "../axios/axios";
 
 export default {
   name: "Shop",
@@ -55,14 +55,14 @@ export default {
   },
 
   created :function() {
-    axios.post("http://localhost:8080/api/commodity/shoplist").then(res =>{
+    axios.post("/commodity/shoplist").then(res =>{
       this.allID = res.data;
       console.log(this.allID);
       console.log(this.allID.length);
       for(let i = 0; i < this.allID.length; i++){
         let formData = new FormData();
         formData.append('id', this.allID[i]);
-        axios.post("http://localhost:8080/api/commodity/check", formData).then(res =>{
+        axios.post("/commodity/check", formData).then(res =>{
           this.allProduct.push(res.data);
         })
         formData.delete('id');

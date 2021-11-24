@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import axios from "axios";
+import axios from "../axios/axios";
 
 export default {
   name: "Permissions",
@@ -60,7 +60,7 @@ export default {
       if(this.nowUserSellerPermissions !== '0' || this.nowUserAdministratorPermissions !== '0'){
         let delFormData = new FormData();
         delFormData.append('userId', this.nowUser);
-        axios.post("http://localhost:8080/api/jurisdiction/del", delFormData).then(async res => {
+        axios.post("/jurisdiction/del", delFormData).then(async res => {
           let formData1 = new FormData();
           if(choise === 1){
             await location.reload();
@@ -69,7 +69,7 @@ export default {
             formData1.append('administratorPower', '0')
             formData1.append('sellerPower', '1')
             formData1.append('userId', this.nowUser);
-            await axios.post("http://localhost:8080/api/jurisdiction/add", formData1).then(async res => {
+            await axios.post("/jurisdiction/add", formData1).then(async res => {
               await location.reload();
             })
           }
@@ -77,7 +77,7 @@ export default {
             formData1.append('administratorPower', '1')
             formData1.append('sellerPower', '0')
             formData1.append('userId', this.nowUser);
-            await axios.post("http://localhost:8080/api/jurisdiction/add", formData1).then(async res => {
+            await axios.post("/jurisdiction/add", formData1).then(async res => {
               await location.reload();
             })
           }
@@ -85,7 +85,7 @@ export default {
             formData1.append('administratorPower', '1')
             formData1.append('sellerPower', '1')
             formData1.append('userId', this.nowUser);
-            await axios.post("http://localhost:8080/api/jurisdiction/add", formData1).then(async res => {
+            await axios.post("/jurisdiction/add", formData1).then(async res => {
               await location.reload();
             })
           }
@@ -99,14 +99,14 @@ export default {
           formData2.append('administratorPower', '0')
           formData2.append('sellerPower', '1')
           formData2.append('userId', this.nowUser);
-          axios.post("http://localhost:8080/api/jurisdiction/add", formData2).then(async res => {
+          axios.post("/jurisdiction/add", formData2).then(async res => {
             await location.reload();
           })
         }else if(choise === 3){
           formData2.append('administratorPower', '1')
           formData2.append('sellerPower', '0')
           formData2.append('userId', this.nowUser);
-          axios.post("http://localhost:8080/api/jurisdiction/add", formData2).then(async res => {
+          axios.post("/jurisdiction/add", formData2).then(async res => {
             await location.reload();
           })
         }
@@ -114,7 +114,7 @@ export default {
           formData2.append('administratorPower', '1')
           formData2.append('sellerPower', '1')
           formData2.append('userId', this.nowUser);
-          axios.post("http://localhost:8080/api/jurisdiction/add", formData2).then(async res => {
+          axios.post("/jurisdiction/add", formData2).then(async res => {
             await location.reload();
           })
         }
@@ -131,7 +131,7 @@ export default {
     else{
       let formData1 = new FormData();
       formData1.append('userId', this.$store.state.user.id.toString())
-      axios.post("http://localhost:8080/api/jurisdiction/check", formData1).then(res => {
+      axios.post("/jurisdiction/check", formData1).then(res => {
         if(res.data.administratorPower !== 1){
           alert('您没有权限进入此界面。');
           this.$router.replace('/administrator');
@@ -139,13 +139,13 @@ export default {
       })
     }
 
-    axios.post("http://localhost:8080/api/userInfo/checkAll").then(async res =>{
+    axios.post("/userInfo/checkAll").then(async res =>{
       this.allUser = res.data;
       for(let i = 0; i < this.allUser.length; i++){
         //请求用户权限数据
         let formDataPermissions = new FormData();
         formDataPermissions.append('userId ', this.allUser[i].id.toString());
-        await axios.post("http://localhost:8080/api/jurisdiction/check", formDataPermissions).then(res =>{
+        await axios.post("/jurisdiction/check", formDataPermissions).then(res =>{
           this.allPermissions.push(res.data);
         });
         formDataPermissions.delete('userId');

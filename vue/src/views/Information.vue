@@ -6,7 +6,7 @@
 			</el-avatar>
 			<el-upload
 			    ref="upload"
-				action="http://localhost:8080/api/file/personalImg"
+				action="/file/personalImg"
 				accept="image/png,image/jpg,image/jpeg"
 				:show-file-list="false"
 				:before-upload="handleBeforeUpload"
@@ -73,7 +73,7 @@
 </template>
 
 <script>
-import axios from "axios"
+import axios from "../axios/axios"
 
 export default{
 	name: "Information",
@@ -97,7 +97,7 @@ export default{
 			formdata.append("password", this.allInformation.password);
 			formdata.append("phoneNumber", this.allInformation.phoneNumber);
 			formdata.append("photo", this.allInformation.photo);
-			axios.post("http://localhost:8080/api/userInfo/update", formdata).then(res =>{
+			axios.post("/userInfo/update", formdata).then(res =>{
 				location.reload();
 			})
 		},
@@ -118,7 +118,7 @@ export default{
 			let formdata = new FormData();
 			formdata.append("id", this.allInformation.id);
 			formdata.append("photo",this.Newphoto);
-		 axios.post("http://localhost:8080/api/userInfo/update", formdata).then(res =>{
+		 axios.post("/userInfo/update", formdata).then(res =>{
 			// location.reload();
 			this.allInformation.photo = this.Newphoto;
 			console.log(this.allInformation.photo)
@@ -133,7 +133,7 @@ export default{
 		formdata3.append('userId',this.$store.state.user.id)
 		console.log(formdata3);
 		console.log(this.$store.state.user);
-	 axios.post("http://localhost:8080/api/userInfo/checkInfo/",formdata3).then(res =>{
+	 axios.post("/userInfo/checkInfo/",formdata3).then(res =>{
 		this.allInformation = res.data;
 		console.log(this.allInformation);
 		})

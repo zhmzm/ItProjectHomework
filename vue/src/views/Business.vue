@@ -53,7 +53,7 @@
 </template>
 
 <script>
-import axios from "axios";
+import axios from "../axios/axios";
 
 export default {
 data(){
@@ -74,14 +74,14 @@ data(){
 created() {
     let formDataget=new FormData()
     formDataget.append("sellerId",  this.$route.query.id)
-    axios.post("http://localhost:8080/api/commodity/getAllCommodityBySellerId",formDataget).then(async res=>{
+    axios.post("/commodity/getAllCommodityBySellerId",formDataget).then(async res=>{
       this.shop=res.data
       for(let i=0;i<this.shop.length;i++)
       {
 
         let formDataProduct = new FormData();
         formDataProduct.append('id', this.shop[i].id);
-        await axios.post("http://localhost:8080/api/commodity/check2", formDataProduct).then(res=>{
+        await axios.post("/commodity/check2", formDataProduct).then(res=>{
           this.temp=this.shop[i]
           this.temp.adress=res.data.description
           console.log(res.data.description)
@@ -93,7 +93,7 @@ created() {
       let formdataSeller=new FormData();
       formdataSeller.append("ID","1");
       formdataSeller.append("sellerId",this.$route.query.id);
-       axios.post("http://localhost:8080/api/seller/get",formdataSeller).then(res=>{
+       axios.post("/seller/get",formdataSeller).then(res=>{
         this.message=res.data
       })
 }

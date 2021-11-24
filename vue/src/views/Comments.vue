@@ -63,7 +63,7 @@
 </template>
 
 <script>
-import axios from "axios";
+import axios from "../axios/axios";
 
 export default {
   name: "Comments",
@@ -86,7 +86,7 @@ export default {
       formdataaddcomment.append("commodityId",this.$route.query.id);
       formdataaddcomment.append("content",this.textarea);
       formdataaddcomment.append("score",this.scorea);
-      axios.post("http://localhost:8080/api/comments/add",formdataaddcomment).then(res=>{
+      axios.post("/comments/add",formdataaddcomment).then(res=>{
         if(res.data===1) {
           alert('成功')
         }
@@ -97,14 +97,14 @@ export default {
     let formdatacomment=new FormData()
     console.log(this.$route.query.id)
     formdatacomment.append("commodityId", this.$route.query.id)
-    axios.post("http://localhost:8080/api/comments/checkByCommodity",formdatacomment).then( async res=>{
+    axios.post("/comments/checkByCommodity",formdatacomment).then( async res=>{
       this.shop=res.data
       console.log(this.shop)
       for(let i=0;i<this.shop.length;i++)
       {
         let formDataProduct = new FormData();
         formDataProduct.append('userId',this.shop[i].userId);
-        await axios.post("http://localhost:8080/api/userInfo/checkInfo", formDataProduct).then(res=>{
+        await axios.post("/userInfo/checkInfo", formDataProduct).then(res=>{
           this.them=this.shop[i]
           this.them.name=res.data.name
           this.commentlist.push(this.them)

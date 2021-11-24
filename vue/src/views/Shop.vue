@@ -39,7 +39,7 @@
 </template>
 
 <script>
-import axios from "axios"	
+import axios from "../axios/axios"	
 
 export default {
   name: "Shop",
@@ -61,14 +61,14 @@ export default {
   },
 
   created () {
-    axios.post("http://localhost:8080/api/commodity/shoplist").then(async res =>{
+    axios.post("/commodity/shoplist").then(async res =>{
          this.allID = res.data;
          for(let i = 0; i < this.allID.length; i++){
 			 
 			 //请求商品信息数据
            let formDataDetail = new FormData();
            formDataDetail.append('id', this.allID[i]);
-         await axios.post("http://localhost:8080/api/commodity/check", formDataDetail).then(res =>{
+         await axios.post("/commodity/check", formDataDetail).then(res =>{
 			 this.tempObj = res.data;
            });
            formDataDetail.delete('id');
@@ -76,7 +76,7 @@ export default {
 		   //请求图片数据
 		   let formDataPhoto = new FormData();
 		   formDataPhoto.append('commodityID', this.allID[i]);
-        await axios.post("http://localhost:8080/api/commodity/photo", formDataPhoto).then(res =>{
+        await axios.post("/commodity/photo", formDataPhoto).then(res =>{
 				this.tempObj.address = res.data[0].address;
 				this.allItem.push(this.tempObj);
 		   });

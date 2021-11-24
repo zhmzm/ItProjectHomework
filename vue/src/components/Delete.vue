@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import axios from "axios";
+import axios from "../axios/axios";
 
 export default {
   name: "Delete",
@@ -44,7 +44,7 @@ export default {
       this.dialogVisible = false;
       let formData = new FormData();
       formData.append('id', this.nowProduct);
-      axios.post("http://localhost:8080/api/commodity/del", formData).then(res => {
+      axios.post("/commodity/del", formData).then(res => {
         location.reload();
       })
     }
@@ -58,7 +58,7 @@ export default {
     else{
       let formData1 = new FormData();
       formData1.append('userId', this.$store.state.user.id.toString())
-      axios.post("http://localhost:8080/api/jurisdiction/check", formData1).then(res => {
+      axios.post("/jurisdiction/check", formData1).then(res => {
         if(res.data.sellerPower !== 1 && res.data.administratorPower !== 1){
           alert('您没有权限进入此界面。');
           this.$router.replace('/administrator');
@@ -66,14 +66,14 @@ export default {
       })
     }
 
-    axios.post("http://localhost:8080/api/commodity/shoplist").then(async res =>{
+    axios.post("/commodity/shoplist").then(async res =>{
       this.allID = res.data;
       for(let i = 0; i < this.allID.length; i++){
 
         //请求商品信息数据
         let formDataDetail = new FormData();
         formDataDetail.append('id', this.allID[i]);
-        await axios.post("http://localhost:8080/api/commodity/check", formDataDetail).then(res =>{
+        await axios.post("/commodity/check", formDataDetail).then(res =>{
           this.tempObj = res.data;
           this.allItem.push(this.tempObj);
         });

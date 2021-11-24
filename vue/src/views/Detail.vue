@@ -42,7 +42,7 @@
 </template>
 
 <script>
-import axios from "axios";
+import axios from "../axios/axios";
 
 export default {
   name: "Detail",
@@ -59,7 +59,7 @@ export default {
       formDataCommodity.append("createPrice",this.productDetail.prise*this.productDetail.discount)
       formDataCommodity.append("userId",this.$route.query.id)
       formDataCommodity.append("num","1")
-      axios.post("http://localhost:8080/api/shopCart/addCartList",formDataCommodity).then(res=>{
+      axios.post("/shopCart/addCartList",formDataCommodity).then(res=>{
         if(res.data===1)
           alert('成功')
       })
@@ -68,13 +68,13 @@ export default {
   created: function () {
     let formData1 = new FormData();
     formData1.append('id', this.$route.query.id)
-    axios.post("http://localhost:8080/api/commodity/check", formData1).then(res => {
+    axios.post("/commodity/check", formData1).then(res => {
         this.productDetail = res.data;
         console.log(res.data);
     })
     let formData2 = new FormData();
     formData2.append('commodityID', this.$route.query.id)
-    axios.post("http://localhost:8080/api/commodity/photo", formData2).then(res => {
+    axios.post("/commodity/photo", formData2).then(res => {
         this.imgURL = res.data;
     })
   }
