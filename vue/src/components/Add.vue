@@ -19,10 +19,13 @@
       <el-form-item>
       </el-form-item>
 
+
+<!--      action="https://xuenihongzhao.info/api/file/CommodityImg"-->
       <el-form-item label="商品图片" :label-width="formLabelWidth" style="margin-left: 120px">
         <el-upload
             ref="upload"
-            action="http://106.52.23.196:8081/api/file/CommodityImg"
+            action="https://xuenihongzhao.info/api/file/CommodityImg"
+            :on-success="handle_success"
             accept="image/png,image/gif,image/jpg,image/jpeg"
             list-type="picture-card"
             :auto-upload="false"
@@ -61,6 +64,8 @@ export default {
     return {
       afterDialogVisible: false,
       formLabelWidth: '80px',
+      commodityID: '',
+      commodityImg: [],
       form: {
         name: '',
         description: '',
@@ -82,6 +87,9 @@ export default {
       }
     },
 
+    handle_success(res) {
+      this.commodityImg.push(res);
+    },
 
     postToDatabase() {
       this.$refs.upload.submit();
@@ -93,8 +101,19 @@ export default {
       formData.append('name', this.form.name)
       formData.append('prise', parseFloat(this.form.price))
       formData.append('sellerId','1')
-      axios.post("/commodity/add", formData).then(res => {
-
+      axios.post("/commodity/add", formData).then(async res => {
+        console.log(res.data);
+        let fd = new FormData();
+        for(let i = 0; i < this.commodityImg.length; i++){
+          fd.append("commodityId", parseInt(res.data));
+          fd.append("picAdress", this.commodityImg[i]);
+          fd.append("picSlot", parseInt(i));
+          await axios.post("/file/updateInfo", fd).then(res => {
+          })
+          fd.delete("commodityId");
+          fd.delete("picAdress");
+          fd.delete("picSlot");
+        }
       })
     },
     afterClick(){

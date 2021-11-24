@@ -63,13 +63,13 @@ export default {
   created () {
     axios.post("/commodity/shoplist").then(async res =>{
          this.allID = res.data;
-         for(let i = 0; i < this.allID.length; i++){
+           for(let i = 0; i < this.allID.length; i++){
 			 
 			 //请求商品信息数据
            let formDataDetail = new FormData();
            formDataDetail.append('id', this.allID[i]);
-         await axios.post("/commodity/check", formDataDetail).then(res =>{
-			 this.tempObj = res.data;
+            await axios.post("/commodity/check", formDataDetail).then(res =>{
+			      this.tempObj = res.data;
            });
            formDataDetail.delete('id');
 		   
@@ -79,10 +79,11 @@ export default {
         await axios.post("/commodity/photo", formDataPhoto).then(res =>{
 				this.tempObj.address = res.data[0].address;
 				this.allItem.push(this.tempObj);
+          console.log(res.data[0].address)
 		   });
 		   formDataPhoto.delete('commodityID');
          }
-      console.log(this.allItem)
+
        });
  },
  

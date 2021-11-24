@@ -32,7 +32,7 @@
           <el-button type="primary" plain style="margin-right: 90px; width: 100px">查看评论</el-button>
         </router-link>
       <el-button type="primary" plain style="margin-right: 45px; width: 100px" @click="addToShoppingCart">加入购物车</el-button>
-      <el-button type="primary" plain style="margin-left: 45px; width: 100px">立即购买</el-button>
+      <el-button type="primary" plain style="margin-left: 45px; width: 100px" @click="addtoMyorder">立即购买</el-button>
     </div>
       <router-link :to="{ path: '/business', query: {id:productDetail.sellerId} }">
         <el-button type="primary" plain style="width: 100px">查看商家</el-button>
@@ -57,13 +57,25 @@ export default {
       let formDataCommodity=new FormData
       formDataCommodity.append("commodityId",this.productDetail.id)
       formDataCommodity.append("createPrice",this.productDetail.prise*this.productDetail.discount)
-      formDataCommodity.append("userId",this.$route.query.id)
+      formDataCommodity.append("userId",this.$store.state.user.id)
       formDataCommodity.append("num","1")
       axios.post("/shopCart/addCartList",formDataCommodity).then(res=>{
         if(res.data===1)
           alert('成功')
       })
     },
+    addtoMyorder(){
+      let formdata = new FormData
+      formdata.append("commodityId",this.productDetail.id)
+      formdata.append("num","1")
+      formdata.append("userId",this.$route.query.id)
+      formdata.append("price",this.productDetail.prise*this.productDetail.discount)
+      formdata.append("sellerId",this.productDetail.sellerId)
+      axios.post("/order/add/",formdata).then(res=>{
+        if(res.data===1)
+          alert("添加成功")
+      })
+    }
   },
   created: function () {
     let formData1 = new FormData();

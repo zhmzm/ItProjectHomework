@@ -87,12 +87,6 @@
       </div>
 
     </div>
-    <div v-else class="cart-empty">
-      <div class="empty">
-        <h2>您的购物车还是空的！</h2>
-        <p>快去购物吧！</p>
-      </div>
-    </div>
   </div>
 </template>
 
@@ -115,8 +109,10 @@ export default {
 
   created() {
     let formData3=new FormData()
-    formData3.append('userId',this.$store.state.user.id)
+    formData3.append('userId',parseInt(this.$store.state.user.id))
+    console.log(this.$store.state.user.id)
     axios.post("/shopCart/getCartList/",formData3).then(async res=>{
+      console.log(res.data);
       this.shop=res.data;
       for(let i=0;i<this.shop.length;i++)
       {
@@ -469,21 +465,5 @@ export default {
 .shoppingCart .cart-empty {
   width: 1225px;
   margin: 0 auto;
-}
-.shoppingCart .cart-empty .empty {
-  height: 300px;
-  padding: 0 0 130px 558px;
-  margin: 65px 0 0;
-  background: url(../assets/imgs/cart-empty.png) no-repeat 124px 0;
-  color: #b0b0b0;
-  overflow: hidden;
-}
-.shoppingCart .cart-empty .empty h2 {
-  margin: 70px 0 15px;
-  font-size: 36px;
-}
-.shoppingCart .cart-empty .empty p {
-  margin: 0 0 20px;
-  font-size: 20px;
 }
 </style>
