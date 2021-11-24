@@ -61,9 +61,6 @@
 
       <div class="cart-bar">
         <div class="cart-bar-left">
-        <span>
-            <router-link to="">继续购物</router-link>
-          </span>
           <span class="sep">|</span>
           <span class="cart-total">
             已选择

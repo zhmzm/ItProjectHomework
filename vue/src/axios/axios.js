@@ -6,7 +6,7 @@ instance.defaults.headers.post['Content-Type']='application/x-www-form-urlencode
 if(process.env.NODE_ENV==='development'){
   instance.defaults.baseURL='/api'
 } else if(process.env.NODE_ENV==='production'){
-  instance.defaults.baseURL='http://106.52.23.196/api/'
+  instance.defaults.baseURL='https://xuenihongzhao.info/api/'
 }
 
 
